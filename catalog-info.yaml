@@ -1,0 +1,15 @@
+﻿apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: dev-eks-cluster
+  annotations:
+    github.com/project-slug: anadevti/aws-eks
+  description: AWS EKS cluster gerenciado pelo Terraform
+  tags:
+    - aws
+    - eks
+    - terraform
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
