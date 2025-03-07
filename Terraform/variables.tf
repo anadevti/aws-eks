@@ -1,7 +1,7 @@
 ﻿variable "region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "sa-east-1"
 }
 
 variable "cluster_version" {
@@ -44,4 +44,12 @@ variable "cluster_desired_size" {
   description = "K8s Cluster desired size"
   type        = number
   default     = 2
+}
+
+variable "aws_access_key" {
+  type = string
+}
+
+variable "aws_secret_key" {
+  type = string
 }
