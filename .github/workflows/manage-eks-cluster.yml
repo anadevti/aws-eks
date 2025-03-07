@@ -17,16 +17,13 @@ jobs:
   apply_cluster:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.action == 'apply' }}
+    env:
+      TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Configurar Terraform Credentials
-        run: |
-          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > $HOME/.terraformrc
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Init
         run: terraform init
         working-directory: Terraform
