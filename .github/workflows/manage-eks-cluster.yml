@@ -27,7 +27,10 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}  # Token do Terraform Cloud
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          export TF_CLI_CONFIG_FILE="$(mktemp)"
+          echo "credentials \"app.terraform.io\" { token = \"${{ secrets.TF_API_TOKEN }}\" }" > $TF_CLI_CONFIG_FILE
+          terraform init
         working-directory: Terraform
 
       - name: Terraform Format
@@ -61,7 +64,10 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}  # Token do Terraform Cloud
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          export TF_CLI_CONFIG_FILE="$(mktemp)"
+          echo "credentials \"app.terraform.io\" { token = \"${{ secrets.TF_API_TOKEN }}\" }" > $TF_CLI_CONFIG_FILE
+          terraform init
         working-directory: Terraform
 
       - name: Terraform Format
