@@ -30,13 +30,14 @@ jobs:
         run: |
           export TF_CLI_CONFIG_FILE="$(mktemp)"
           echo "credentials \"app.terraform.io\" { token = \"${{ secrets.TF_API_TOKEN }}\" }" > $TF_CLI_CONFIG_FILE
+          echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
         shell: bash
 
       - name: Terraform Init
         run: terraform init
         working-directory: Terraform
         env:
-          TF_CLI_CONFIG_FILE: $TF_CLI_CONFIG_FILE  # Passa o arquivo de configuração para o Terraform
+          TF_CLI_CONFIG_FILE: ${{ env.TF_CLI_CONFIG_FILE }}  # Passa o arquivo de configuração para o Terraform
 
       - name: Terraform Format
         run: terraform fmt
@@ -72,13 +73,14 @@ jobs:
         run: |
           export TF_CLI_CONFIG_FILE="$(mktemp)"
           echo "credentials \"app.terraform.io\" { token = \"${{ secrets.TF_API_TOKEN }}\" }" > $TF_CLI_CONFIG_FILE
+          echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
         shell: bash
 
       - name: Terraform Init
         run: terraform init
         working-directory: Terraform
         env:
-          TF_CLI_CONFIG_FILE: $TF_CLI_CONFIG_FILE  # Passa o arquivo de configuração para o Terraform
+          TF_CLI_CONFIG_FILE: ${{ env.TF_CLI_CONFIG_FILE }}  # Passa o arquivo de configuração para o Terraform
 
       - name: Terraform Format
         run: terraform fmt
